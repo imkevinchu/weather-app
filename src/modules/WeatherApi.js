@@ -13,6 +13,37 @@ export class WeatherApi {
     return { endpoint, mode };
   }
 
+  static processWeatherData(responseData) {
+    // ES6 nested object destructuring
+    const {
+      name: city,
+      weather: [{ description }],
+      main: { temp: temperature, feels_like: temperatureFeel, humidity },
+      wind: { speed: windSpeed },
+    } = responseData;
+
+    // manual destructuring
+
+    /*  
+      const name = responseData.name;
+      const description = responseData.weather[0].description;
+      const temperature = responseData.main.temp;
+      const temperatureFeel = responseData.main.feels_like;
+      const humidity = responseData.main.humidity; 
+    */
+
+    const weather = {
+      city,
+      description,
+      temperature,
+      temperatureFeel,
+      humidity,
+      windSpeed,
+    };
+
+    return weather;
+  }
+
   static async getCoordinates(location) {
     try {
       const request = WeatherApi.getCoordinatesRequestBuilder(location);
@@ -35,20 +66,7 @@ export class WeatherApi {
       const response = await fetch(request.endpoint, request.mode);
       const responseData = await response.json();
 
-      const name = responseData.name;
-      const description = responseData.weather[0].description;
-      const temperature = responseData.main.temp;
-      const temperatureFeel = responseData.main.feels_like;
-      const humidity = responseData.main.humidity;
-
-      const weather = {
-        name,
-        description,
-        temperature,
-        temperatureFeel,
-        humidity,
-      };
-
+      const weather = WeatherApi.processWeatherData(responseData);
       console.log(weather);
       return weather;
     } catch (error) {
