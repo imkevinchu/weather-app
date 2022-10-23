@@ -17,4 +17,4 @@ Minimalist weather app based on the [weather app assignment on The Odin Project]
 
 ### Preview
 
-![](./preview.jpg)
+![](./preview.png)
