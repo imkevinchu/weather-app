@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  font-size: 72.5%;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input,
+button {
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: initial;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: large;
+  margin-bottom: 2rem;
+}
+
+.input i {
+  font-size: 22px;
+  color: darkgray;
+}
+
+.input i:hover {
+  cursor: pointer;
+}
+
+.input input[type="text"] {
+  background-color: whitesmoke;
+  border-radius: 16px;
+  margin-right: 12px;
+  border: none;
+  padding: 6px 16px;
+  font-size: 18px;
+  width: 510px;
+  height: 36px;
+}
+
+.weather {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 90%;
+  color: black;
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.1rem;
+  border-left: 0.1rem solid rgba(0, 0, 0, 0.5);
+  height: 10rem;
+  padding-left: 3.5rem;
+  margin-bottom: 4.8rem;
+  justify-content: space-between;
+}
+
+.description {
+  font-size: 2.2rem;
+  letter-spacing: 0.1rem;
+  padding-bottom: 0.3rem;
+}
+
+.description::first-letter {
+  text-transform: capitalize;
+}
+
+.city {
+  font-size: 4rem;
+  line-height: 3.5rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.1rem;
+}
+
+.temperature {
+  font-size: 16rem;
+  font-weight: 900;
+  position: relative;
+}
+
+.temperature::after {
+  content: "\00B0 F";
+  font-size: 3rem;
+  position: absolute;
+  top: 1.8rem;
+}
+
+.feels-like {
+  position: relative;
+}
+
+.feels-like::after {
+  content: "\00B0 F";
+  position: absolute;
+  bottom: 1.1rem;
+  font-size: 1rem;
+}

@@ -10,5 +10,33 @@
     ></script>
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <div class="input" id="input">
+        <form id="form">
+          <input
+            type="text"
+            name="location-input"
+            id="location-input"
+            placeholder="Where in the world are you?"
+          />
+          <button type="submit" id="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+    </header>
+    <div class="weather" id="weather">
+      <div class="weather-main" id="weather-main">
+        <p class="description" id="description">Overcast clouds</p>
+        <h1 class="city" id="city">London, England</h1>
+        <span class="temperature" id="temperature">58</span>
+      </div>
+      <div class="weather-details" id="weather-details">
+        <p class="feels-like" id="feels-like">FEELS LIKE: 70</p>
+        <p class="humidity" id="humidity">HUMIDITY: 69%</p>
+        <p class="wind" id="wind">WIND: 5 MPH</p>
+      </div>
+    </div>
+  </body>
 </html>
