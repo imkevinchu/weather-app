@@ -13,8 +13,7 @@ export class WeatherApi {
     return { endpoint, mode };
   }
 
-  static processWeatherData(responseData) {
-    // ES6 nested object destructuring
+  static processWeatherData(responseData, state) {
     const {
       name: city,
       weather: [{ description }],
@@ -22,24 +21,21 @@ export class WeatherApi {
       wind: { speed: windSpeed },
     } = responseData;
 
-    // manual destructuring
-
-    /*  
-      const name = responseData.name;
-      const description = responseData.weather[0].description;
-      const temperature = responseData.main.temp;
-      const temperatureFeel = responseData.main.feels_like;
-      const humidity = responseData.main.humidity; 
-    */
-
     const weather = {
       city,
+      state,
       description,
       temperature,
       temperatureFeel,
       humidity,
       windSpeed,
     };
+
+    for (const key in weather) {
+      if (weather[key].toFixed) {
+        weather[key] = Math.round(weather[key]);
+      }
+    }
 
     return weather;
   }
@@ -52,7 +48,8 @@ export class WeatherApi {
 
       const lat = responseData[0].lat;
       const lon = responseData[0].lon;
-      const coordinates = { lat, lon };
+      const state = responseData[0].state;
+      const coordinates = { lat, lon, state };
 
       return coordinates;
     } catch (error) {
@@ -60,17 +57,27 @@ export class WeatherApi {
     }
   }
 
-  static async getWeather(lat, lon, units) {
+  static async getWeather(lat, lon, state, units) {
     try {
       const request = WeatherApi.getWeatherRequestBuilder(lat, lon, units);
       const response = await fetch(request.endpoint, request.mode);
       const responseData = await response.json();
 
-      const weather = WeatherApi.processWeatherData(responseData);
-      console.log(weather);
+      const weather = WeatherApi.processWeatherData(responseData, state);
       return weather;
     } catch (error) {
       console.log(error);
     }
   }
+
+  static searchWeather = (location) => {
+    return WeatherApi.getCoordinates(location).then((coordinates) =>
+      WeatherApi.getWeather(
+        coordinates.lat,
+        coordinates.lon,
+        coordinates.state,
+        "imperial"
+      )
+    );
+  };
 }

@@ -1,10 +1,4 @@
-import { WeatherApi } from "./modules/weatherApi";
+import { UI } from "./modules/UI";
+import "./style.css";
 
-// console.log(WeatherApi.getCoordinates("London"));
-// console.log(WeatherApi.getWeather(51.5073219, -0.1276474, "imperial"));
-
-console.log(
-  WeatherApi.getCoordinates("London").then((coordinates) =>
-    WeatherApi.getWeather(coordinates.lat, coordinates.lon, "imperial")
-  )
-);
+UI.initializeApp();
